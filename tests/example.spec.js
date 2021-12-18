@@ -1,9 +1,6 @@
-const { test, expect } = require('@playwright/test');
-
-test.use({ headless: false });
+const { test } = require('@playwright/test');
 
 test('basic test', async ({ page }) => {
-  await page.goto('about:blank');
   await page.evaluate(`
     document.body.innerHTML = \`
     <video playsinline autoplay style="width:320px;height:320px;">
