@@ -1,13 +1,9 @@
 const { test } = require('@playwright/test');
 
 test('basic test', async ({ page }) => {
-  await page.evaluate(`
-    document.body.innerHTML = \`
-    <video playsinline autoplay style="width:320px;height:320px;">
-      <source src="https://www.html5rocks.com/en/tutorials/video/basics/devstories.mp4" type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"'/>
-    </video>
-    \`;
-  `);
-  await new Promise(p => setTimeout(p, 2000));
-  await page.evaluate('document.querySelector("video")');
+  const src = 'https://static.digitecgalaxus.ch/Files/3/8/9/7/2/2/6/6/iPhone_12_PDP_Image_Position-3__en-US.jpg';
+  const start = Date.now();
+  await page.evaluate(`document.body.innerHTML = '<img src="${src}" style="width:200px; height: 200px">';`);
+  await page.evaluate(`new Promise((resolve) => document.querySelector("img").addEventListener("load", resolve))`);
+  console.log('image load time in ms', Date.now() - start);
 });
